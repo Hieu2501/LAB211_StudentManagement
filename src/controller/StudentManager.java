@@ -2,8 +2,6 @@ package controller;
 
 import common.StudentManagementSystem;
 import common.Library;
-import java.util.List;
-import model.Student;
 import view.Menu;
 
 public class StudentManager extends Menu<String> {
@@ -49,6 +47,8 @@ public class StudentManager extends Menu<String> {
                     } else {
                         System.out.println("Your choice invalid!");
                     }
+                } else {
+                    System.out.println("Student ID not found to search!");
                 }
                 break;
             case 4:

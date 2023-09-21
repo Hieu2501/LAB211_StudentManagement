@@ -2,9 +2,8 @@ package common;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import model.Student;
 
@@ -52,12 +51,24 @@ public class StudentManagementSystem extends ArrayList<Student> {
     }
 
     public List<Student> sort(List<Student> list) {
-        Collections.sort(list, (a, b) -> a.getStudentName().compareTo(b.getStudentName()));
+        Collections.sort(list, new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return o1.getStudentName().compareTo(o2.getStudentName());
+            }
+        });
         return list;
     }
 
     public List<Student> searchByName(String studentName) {
-        return this.stream().filter(s -> s.getStudentName().contains(studentName)).collect(Collectors.toList());
+//        return this.stream().filter(s -> s.getStudentName().contains(studentName)).collect(Collectors.toList());
+        List<Student> result = new ArrayList<>();
+        for (Student student : this) {
+            if(student.getStudentName().equalsIgnoreCase(studentName)) {
+                result.add(student);
+            }
+        }
+        return result;
     }
 
     public Student searchById(String studentId) {
